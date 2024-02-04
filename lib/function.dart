@@ -1,6 +1,5 @@
-class Funct {
-  // ignore: non_constant_identifier_names
-  num Calculator(String a) {
+class Functions {
+  num calculator(String a) {
     List<String> operations = [];
     List<num> number = [];
     String c = '';

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:calculator/button.dart';
 import 'package:calculator/function.dart';
 import 'package:flutter/material.dart';
@@ -53,19 +51,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: EdgeInsets.only(top: 100),
+        margin: const EdgeInsets.only(top: 100),
         child: Column(
           children: [
             Expanded(
-                flex: 1,
-                child: Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  child: Align(
-                      alignment: Alignment.bottomRight,
-                      child: Text(input,
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 50))),
-                )),
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(right: 8),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    input,
+                    style: const TextStyle(color: Colors.white, fontSize: 50),
+                  ),
+                ),
+              ),
+            ),
             Expanded(
               flex: 2,
               child: GridView.builder(
@@ -76,39 +77,43 @@ class _HomePageState extends State<HomePage> {
                     style:
                         TextButton.styleFrom(backgroundColor: Colors.black12),
                     onPressed: () {
-                      setState(() {
-                        checkInput(index);
-                        switch (sembol[index]) {
-                          case 'C':
-                            input = '0';
-                            break;
-                          case 'DEL':
-                            input = input.substring(0, input.length - 1);
-                            if (input.isEmpty) {
+                      setState(
+                        () {
+                          checkInput(index);
+                          switch (sembol[index]) {
+                            case 'C':
                               input = '0';
-                            }
-                            break;
-                          case '=':
-                            result = Funct().Calculator(input);
-                            input = result.toString();
-                            break;
-                        }
-                      });
+                              break;
+                            case 'DEL':
+                              input = input.substring(0, input.length - 1);
+                              if (input.isEmpty) {
+                                input = '0';
+                              }
+                              break;
+                            case '=':
+                              result = Functions().calculator(input);
+                              input = result.toString();
+                              break;
+                          }
+                        },
+                      );
                     },
-                    child: CalButton(
+                    child: CalculatorButton(
                       text: sembol[index],
                       color: Colors.black,
                       textStyle: TextStyle(
-                          color: isOperating(sembol[index])
-                              ? const Color.fromARGB(255, 151, 70, 4)
-                              : const Color.fromARGB(255, 128, 127, 127),
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold),
+                        color: isOperating(sembol[index])
+                            ? const Color.fromARGB(255, 151, 70, 4)
+                            : const Color.fromARGB(255, 128, 127, 127),
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   );
                 },
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4),
+                  crossAxisCount: 4,
+                ),
               ),
             )
           ],
