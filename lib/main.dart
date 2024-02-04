@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       title: 'Calculator Made by Tunc',
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
